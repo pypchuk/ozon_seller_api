@@ -32,6 +32,7 @@ class BaseSession(abc.ABC):
         self.retort = adaptix.Retort(
             recipe=[
                 adaptix.name_mapping(skip="__.*"),
+                adaptix.name_mapping(map={"_with": "with"}),
                 adaptix.dumper(datetime, lambda x: x.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
             ]
         )

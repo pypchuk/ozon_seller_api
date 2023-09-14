@@ -12,6 +12,7 @@ class Filter:
     processed_at_to: datetime
     cancel_reason_id: list[int] = field(default_factory=list)
     delivery_schema: list[str] = field(default_factory=list)
+    """"fbs", "fbo", "crossborder\""""
     sku: list[int] = field(default_factory=list)
     status_alias: list[str] = field(default_factory=list)
     statuses: list[int] = field(default_factory=list)

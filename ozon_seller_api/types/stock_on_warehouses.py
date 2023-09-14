@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from typing import Any
-
 from enum import Enum
 from datetime import datetime
 
@@ -24,11 +22,16 @@ class Status(Enum):
 
 
 @dataclass
-class Report:
-    code: str
-    created_at: datetime
-    error: str
-    file: str
-    params: dict[str, Any]
-    report_type: ReportType
-    status: Status
+class StockOnWarehouseRow:
+    sku: int
+    item_code: str
+    item_name: str
+    free_to_sell_amount: int
+    promised_amount: int
+    reserved_amount: int
+    warehouse_name: str
+
+
+@dataclass
+class StockOnWarehousesResult:
+    rows: list[StockOnWarehouseRow]
