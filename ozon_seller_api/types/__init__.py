@@ -5,6 +5,7 @@ from .stock_warehouse_type import WarehouseType
 from .sort_direction import Dir
 from .fbo_posting_item import PostingItem
 from .stock_on_warehouses import StockOnWarehousesResult
+from .fbo_posting_with_params import FboPostingWithParams
 
 
 __all__ = [
@@ -16,4 +17,5 @@ __all__ = [
     "Dir",
     "PostingItem",
     "StockOnWarehousesResult",
+    "FboPostingWithParams",
 ]

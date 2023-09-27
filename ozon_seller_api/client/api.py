@@ -11,6 +11,7 @@ from ..methods import (
     ReportInfo,
     FboPostingsList,
     StockOnWarehouses,
+    FboPostingsGet,
 )
 from ..types import (
     Report,
@@ -79,6 +80,20 @@ class OzonClient:
                 offset=offset,
                 _with=_with,
                 filter=_filter,
+            )
+        )
+
+    async def get_fbo_posting(
+            self,
+            posting_number: str,
+            _with: FboPostingWithParams = FboPostingWithParams(True, True),
+            translit: bool = True,
+    ):
+        return await self.session(
+            FboPostingsGet(
+                posting_number=posting_number,
+                _with=_with,
+                translit=translit,
             )
         )
 

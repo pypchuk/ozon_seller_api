@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from .base import OzonMethod
-from ..types import Dir, PostingItem
+from ..types import Dir, PostingItem, FboPostingWithParams
 
 
 class Status(str, Enum):
@@ -20,11 +20,6 @@ class FboPostingListFilter(NamedTuple):
     since: datetime
     to: datetime
     status: Status = Status.ALL
-
-
-class FboPostingWithParams(NamedTuple):
-    analytics_data: bool = False
-    financial_data: bool = False
 
 
 @dataclass
