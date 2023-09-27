@@ -3,7 +3,7 @@ import logging
 from typing import Callable, Coroutine, Any
 from json import loads, JSONDecodeError
 
-from aiohttp.web import Application, run_app, get, Request, Response
+from aiohttp.web import Application, get, Request, Response
 
 from adaptix.load_error import LoadError
 from adaptix.struct_path import StructPathRendererFilter
@@ -105,14 +105,3 @@ class Server:
                 status=service_response.http_status,
                 text=to_json(service_response)
             )
-
-
-app = Application()
-
-server = Server(
-    "1.2",
-    "Ozon-analytics",
-    app
-)
-
-run_app(app)
