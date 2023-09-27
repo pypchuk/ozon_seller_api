@@ -11,6 +11,12 @@ python = "^3.11"
 adaptix = "^3.0.0a4"
 aiohttp = "^3.8.5"
 
+[tool.poetry.group.server]
+optional = true
+
+[tool.poetry.group.server.dependencies]
+aiohttp = "3.8.5"
+
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.270"
 mypy = "^1.3.0"
