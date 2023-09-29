@@ -21,12 +21,8 @@ from .types.message_type import MessageType
 
 from .type_loader import load_event
 
+
 logging.getLogger().addFilter(StructPathRendererFilter())
-logging.getLogger().handlers[0].formatter = logging.Formatter(
-    fmt='{levelname}:{name}:{message} struct_path={struct_path}',
-    style='{',
-    defaults={'struct_path': None},
-)
 
 Handler = Callable[[OzonEvent], Coroutine[Any, Any, Error | Success]]
 HandlersTable = dict[MessageType, Handler]
