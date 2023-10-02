@@ -3,7 +3,7 @@ import logging
 from typing import Callable, Coroutine, Any
 from json import loads, JSONDecodeError
 
-from aiohttp.web import Application, get, Request, Response
+from aiohttp.web import Application, post, Request, Response
 
 from adaptix.load_error import LoadError
 from adaptix.struct_path import StructPathRendererFilter
@@ -33,7 +33,7 @@ class Server:
         self.handlers_table: HandlersTable = {}
         self.app = aiohttp_app
 
-        aiohttp_app.add_routes([get('/', self.push_event_endpoint)])
+        aiohttp_app.add_routes([post('/', self.push_event_endpoint)])
 
         async def handle_ping(_) -> PingSuccess:
             return PingSuccess.create(version=app_version, name=app_name)
