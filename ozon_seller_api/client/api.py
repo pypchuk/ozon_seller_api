@@ -22,7 +22,7 @@ from ..types import (
     WarehouseType,
 )
 from ..methods.create_postings_report import Filter as CreatePostingsReportFilter
-from ..methods.fbo_posting_list import FboPostingListFilter, FboPostingWithParams
+from ..methods.fbo_posting_list import FboPostingListFilter, FboPostingWithParams, Dir
 
 
 DEFAULT_HEADERS: dict[str, str] = {
@@ -73,6 +73,8 @@ class OzonClient:
             offset: int,
             _with: FboPostingWithParams,
             _filter: FboPostingListFilter,
+            _dir: Dir = Dir.ASC,
+            translit: bool = True,
     ) -> list[PostingItem]:
         return await self.session(
             FboPostingsList(
@@ -80,8 +82,36 @@ class OzonClient:
                 offset=offset,
                 _with=_with,
                 filter=_filter,
+                dir=_dir,
+                translit=translit,
             )
         )
+
+    async def get_all_fbo_postings(
+            self,
+            _filter: FboPostingListFilter,
+            _with: FboPostingWithParams = FboPostingWithParams(True, True),
+            start_offset: int = 0,
+            _dir: Dir = Dir.ASC,
+    ):
+        result_postings: list[PostingItem] = []
+        offset = start_offset
+        step = 1000
+
+        while True:
+            postings = await self.fbo_postings_list(
+                limit=step,
+                offset=offset,
+                _with=_with,
+                _filter=_filter,
+                _dir=_dir,
+            )
+
+            if len(postings) == 0:
+                return result_postings
+
+            result_postings.extend(postings)
+            offset += step
 
     async def get_fbo_posting(
             self,
